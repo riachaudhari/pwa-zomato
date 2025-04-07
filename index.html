@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zomato Clone</title>
+  <link rel="stylesheet" href="styles.css"> <!-- External CSS -->
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff5a5f">
+</head>
+<body>
+    
+  <div class = "hero__section_container">
+    <img src = "heroSectionLogo.png" alt = "Zomato Logo" class = "hero__section_logo" />
+    <h1 class = "hero__section_heading">Discover the best food & drinks in India</h1>
+	  <div class="search-container">
+    <input type="text" id="search" placeholder="Search...">
+</div>
+</div>
+</section>
+<section class = "container_cards">
+		
+    <div class = "we_offer__cards">
+       <img src = "item1.png" alt = "card1 image"/>
+       <div class = "we_offer__cards_content">
+           <h2>Order Online</h2>
+           <p>Stay home and order to your doorstep</p>
+       </div>
+    </div>
+    
+    <div class = "we_offer__cards">
+       <img src = "item2.png" alt = "card1 image"/>
+       <div class = "we_offer__cards_content">
+           <h2>Dining</h2>
+           <p>Visit amazing restaurants and cafes</p>
+       </div>
+    </div>
+    
+    <div class = "we_offer__cards">
+       <img src = "item3.png" alt = "card1 image"/>
+       <div class = "we_offer__cards_content">
+           <h2>Nightlife and clubs</h2>
+           <p>Spend leisure time enjoying the nightlife of Pune</p>
+       </div>
+    </div>
+    
+    <div class = "we_offer__cards">
+       <img src = "item4.png" alt = "card1 image"/>
+       <div class = "we_offer__cards_content">
+           <h2>Takeaway services</h2>
+           <p>We ensure timely delivery to our customers</p>
+       </div>
+    </div>
+    
+</section>
+<section class = "container_collections">
+    <h1>Collections</h1>
+    <div class = "sub_heading__container">
+        <span>Explore curated lists of top restaurants, cafes, pubs in Pune based on trends</span>
+        <span id = "span">All collections in Pune</span>
+    </div>
+    <div class = "collections__cards_container">
+            
+        <div class = "cards card1">
+            <div class = "overlay"></div>
+            <div class = "collections__content">
+                <h4>Live Cricket Screening</h4>
+                <span>56 places</span>
+            </div>
+        </div>
+        
+        <div class = "cards card2">
+            <div class = "overlay"></div>
+            <div class = "collections__content">
+                <h4>Koregaon Park specials</h4>
+                <span>12 places</span>
+            </div>
+        </div>
+        
+        <div class = "cards card3">
+            <div class = "overlay"></div>
+            <div class = "collections__content">
+                <h4>Newly opened Restaurants</h4>
+                <span>36 places</span>
+            </div>
+        </div>
+        
+        <div class = "cards card4">
+            <div class = "overlay"></div>
+            <div class = "collections__content">
+                <h4>Trending Pubs Near me</h4>
+                <span>16 places</span>
+            </div>
+        </div>
+        
+        
+    </div>
+    <footer class = "footer__container">
+        <div class = "footer_section1">
+            <img src = "logo.png" alt = "zomato logo" />
+        </div>
+        <div class = "navigation_container">
+            <div class = "link_container">
+                <h5>About Zomato</h5>
+                <div class = "link_container_anchors">
+                    <a href = "#">Who We Are</a>
+                    <a href = "#">Blog</a>
+                    <a href = "#">Work With Us</a>
+                    <a href = "#">Investor Relations</a>
+                    <a href = "#">Report Fraud</a>
+                    <a href = "#">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class = "link_container">
+                <h5>Zomaverse</h5>
+                <div class = "link_container_anchors">
+                    <a href = "#">Zomato</a>
+                    <a href = "#">Blinkit</a>
+                    <a href = "#">Feeding India</a>
+                    <a href = "#">Hyperpure</a>
+                    <a href = "#">Zomaland</a>
+                </div>
+            </div>
+            
+            <div class = "link_container">
+                <h5>For Restaurants</h5>
+                <div class = "link_container_anchors">
+                    <a href = "#">Partner With Us</a>
+                    <a href = "#">Apps For You</a>
+                </div>
+            </div>
+            
+            <div class = "link_container">
+                <h5>Learn More</h5>
+                <div class = "link_container_anchors">
+                    <a href = "#">Privacy</a>
+                    <a href = "#">Security</a>
+                    <a href = "#">Terms</a>
+                    <a href = "#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+        <div class = "disclaimer">
+        By continuing past this page, you agree to our Terms of Service, Cookie Policy,
+        Privacy Policy and Content Policies. All trademarks are properties of their respective owners.
+        2008-2023 © Zomato™ Ltd. All rights reserved.
+        </div>
+    </footer>
+
+  <!-- ✅ Service Worker, Push, and Sync Logic -->
+  <script>
+    if ('serviceWorker' in navigator && 'SyncManager' in window) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => {
+          console.log('✅ Service Worker registered:', reg);
+
+          // Request Push Notification Permission
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              console.log('🔔 Notification permission granted.');
+            } else {
+              console.log('❌ Notification permission denied.');
+            }
+          });
+
+          // Register Sync Event
+          reg.sync.register('sync-orders')
+            .then(() => {
+              console.log('🔁 Background sync registered for sync-orders.');
+            })
+            .catch(err => {
+              console.error('⚠️ Sync registration failed:', err);
+            });
+        })
+        .catch(err => {
+          console.error('❌ Service Worker registration failed:', err);
+        });
+    }
+    // Simulate push notification via message to service worker
+function simulatePush() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then(registration => {
+      registration.active.postMessage('simulate-push');
+    });
+  }
+}
+
+// Call this function to simulate the push popup
+document.addEventListener('DOMContentLoaded', () => {
+  const simulateBtn = document.createElement('button');
+  simulateBtn.textContent = '🔔 Simulate Push Notification';
+  simulateBtn.style.position = 'fixed';
+  simulateBtn.style.bottom = '20px';
+  simulateBtn.style.right = '20px';
+  simulateBtn.style.padding = '10px 20px';
+  simulateBtn.style.background = '#ff5a5f';
+  simulateBtn.style.color = 'white';
+  simulateBtn.style.border = 'none';
+  simulateBtn.style.borderRadius = '5px';
+  simulateBtn.style.cursor = 'pointer';
+  simulateBtn.addEventListener('click', simulatePush);
+  document.body.appendChild(simulateBtn);
+});
+
+  </script>
+
+</body>
+</html>
